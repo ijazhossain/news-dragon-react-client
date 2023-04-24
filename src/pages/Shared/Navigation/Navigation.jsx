@@ -1,12 +1,20 @@
 import React from 'react';
+import { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { FaUser } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../providers/AuthProvider';
 const Navigation = () => {
     const navigate = useNavigate()
+    const { user, logOut } = useContext(AuthContext)
+    const handleLogout = () => {
+        logOut()
+            .then((result) => { })
+            .catch((error) => console.log(error))
+    }
     return (
         <>
             <Navbar bg="light" variant="light">
@@ -19,7 +27,8 @@ const Navigation = () => {
                     </Nav>
                     <div>
                         <FaUser></FaUser>
-                        <Button onClick={() => navigate('/login')} className='ms-3' variant="dark">Login</Button>
+                        {!user ? <Button onClick={() => navigate('/login')} className='ms-3' variant="dark">Login</Button> :
+                            <Button onClick={handleLogout} className='ms-3' variant="danger">SignOut</Button>}
                     </div>
                 </Container>
             </Navbar>

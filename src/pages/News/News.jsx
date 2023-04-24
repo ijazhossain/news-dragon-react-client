@@ -4,8 +4,14 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { BsArrowLeft } from "react-icons/bs";
+import { useContext } from 'react';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const News = () => {
+    const { loading } = useContext(AuthContext)
+    if (loading) {
+        return <h1>Loading...</h1>
+    }
     const news = useLoaderData()
     // const { id } = useParams()
     const navigate = useNavigate()

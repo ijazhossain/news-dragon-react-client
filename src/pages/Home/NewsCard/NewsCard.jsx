@@ -3,7 +3,7 @@ import { FaBookmark, FaShareAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const NewsCard = ({ news }) => {
-    console.log(news)
+    // console.log(news)
     const { _id, image_url, author, title, details } = news;
     return (
         <div style={{ border: '1px solid #E7E7E7', borderRadius: '5px' }} className='mb-4 p-3'>
