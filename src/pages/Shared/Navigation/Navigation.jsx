@@ -12,7 +12,10 @@ const Navigation = () => {
     const { user, logOut } = useContext(AuthContext)
     const handleLogout = () => {
         logOut()
-            .then((result) => { })
+            .then((result) => {
+
+                console.log('signout successfully')
+            })
             .catch((error) => console.log(error))
     }
     return (
@@ -27,7 +30,10 @@ const Navigation = () => {
                     </Nav>
                     <div>
                         <FaUser></FaUser>
-                        {!user ? <Button onClick={() => navigate('/login')} className='ms-3' variant="dark">Login</Button> :
+                        {!user ?
+                            <Button onClick={() => navigate('/login')} className='ms-3' variant="dark">Login</Button>
+                            :
+
                             <Button onClick={handleLogout} className='ms-3' variant="danger">SignOut</Button>}
                     </div>
                 </Container>

@@ -3,13 +3,15 @@ import { useContext } from 'react';
 import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 import { sendEmailVerification, updateProfile } from 'firebase/auth';
+import { useState } from 'react';
 const Register = () => {
     const { createUser } = useContext(AuthContext)
     // console.log(createUser);
-
+    const [accepted, setAccepted] = useState(false)
+    const navigate = useNavigate()
     const handleRegister = (event) => {
         event.preventDefault()
         const form = event.target;
@@ -31,9 +33,13 @@ const Register = () => {
                 }).catch(error => {
                     console.log(error)
                 })
+                navigate('/')
             }).catch(error => {
                 console.log(error.message);
             })
+    }
+    const handleCheck = (e) => {
+        setAccepted(e.target.checked)
     }
     return (
         <>
@@ -63,10 +69,11 @@ const Register = () => {
                         <Form.Control type="password" name="confirmPassword" placeholder="Confirm Password" />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="Check me out" />
+                        <Form.Check onClick={handleCheck} type="checkbox" label="Accept Terms & Conditions" />
+                        <Link to="/termsConditions">Show Our Tearm & Conditions</Link>
                     </Form.Group>
                     <p className='text-primary'>Already have an account? <Link className="text-danger text-decoration-none" to="/login"><span >Login</span></Link></p>
-                    <Button variant="primary" type="submit">
+                    <Button disabled={!accepted} variant="primary" type="submit">
                         Register
                     </Button>
                 </Form>

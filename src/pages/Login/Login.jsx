@@ -7,15 +7,17 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 import { useRef } from 'react';
 const Login = () => {
-    const { signInUser, loading, resetPassword } = useContext(AuthContext)
-    console.log(signInUser);
+
+    const { signInUser, resetPassword, loading, setLoading
+    } = useContext(AuthContext)
+
     const navigate = useNavigate()
     const location = useLocation()
     const emailRef = useRef()
     const from = location?.state?.from?.pathname || '/';
-    if (loading) {
+    /* if (loading) {
         return <h1>Loading...</h1>
-    }
+    } */
     const handleSignIn = (event) => {
         event.preventDefault()
         const form = event.target;
@@ -28,6 +30,7 @@ const Login = () => {
                 console.log(user);
                 navigate(from, { replace: true })
             }).catch(error => {
+                setLoading(false)
                 console.log(error.message);
             })
     }
@@ -43,6 +46,7 @@ const Login = () => {
                 alert('password reset email sent')
             }).catch(error => {
                 console.log(error.message);
+
             })
     }
     return (

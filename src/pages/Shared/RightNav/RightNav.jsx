@@ -12,7 +12,8 @@ const RightNav = () => {
     const handleGoogleSignIn = () => {
         googleSignIn()
             .then(result => {
-                console.log(result.user);
+                const user = result.user;
+                console.log(user);
             }).catch(error => {
                 console.log(error.message);
             })

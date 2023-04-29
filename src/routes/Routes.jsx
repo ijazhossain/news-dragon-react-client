@@ -8,6 +8,7 @@ import LoginLayOut from "../layouts/LoginLayOut";
 import Login from "../pages/Login/Login";
 import Register from "../Register/Register";
 import PrivateRoute from "./PrivateRoute";
+import TearmsConditions from "../pages/Login/TearmsConditions";
 
 const router = createBrowserRouter([
     {
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
             {
                 path: ':id',
                 element: <Category></Category>,
-                loader: ({ params }) => fetch(`http://localhost:5000/categories/${params.id}`)
+                loader: ({ params }) => fetch(`https://news-dragon-server-2fyzzn35w-ijazhossain.vercel.app/categories/${params.id}`)
             }
 
         ]
@@ -48,7 +49,7 @@ const router = createBrowserRouter([
             {
                 path: ':id',
                 element: <PrivateRoute><News></News></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/news/${params.id}`)
+                loader: ({ params }) => fetch(`https://news-dragon-server-2fyzzn35w-ijazhossain.vercel.app/news/${params.id}`)
             }
         ]
     },
@@ -71,6 +72,12 @@ const router = createBrowserRouter([
                 element: <Register></Register>,
             }
         ]
+    },
+    {
+        path: '/termsConditions',
+        element: <TearmsConditions></TearmsConditions>,
+
+
     }
 ])
 export default router;
